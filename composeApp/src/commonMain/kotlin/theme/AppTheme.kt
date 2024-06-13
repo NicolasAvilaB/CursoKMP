@@ -5,6 +5,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import theme.model.DarkModeColors
 
 @Composable
 fun AppTheme(content: @Composable () -> Unit) {
@@ -21,7 +22,7 @@ fun AppTheme(content: @Composable () -> Unit) {
 }
 
 @Composable
-fun getColorsTheme() {
+fun getColorsTheme(): DarkModeColors {
     val isDarkMode = false
 
     val purple = Color(0xFF6A66FF)
@@ -31,5 +32,12 @@ fun getColorsTheme() {
     val addIconColor = if (isDarkMode) purple else Color.Black
     val colorArrowRound = if (isDarkMode) purple else Color.Gray.copy(alpha = 0.2f)
 
-
+    return DarkModeColors(
+        purple = purple,
+        colorExpenseItem = colorExpenseItem,
+        background = backgroundColor,
+        textColor = textColor,
+        addIconColor = addIconColor,
+        colorArrowRound = colorArrowRound,
+    )
 }
