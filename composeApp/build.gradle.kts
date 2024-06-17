@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -38,6 +37,7 @@ kotlin {
             implementation(compose.runtime)
             api(compose.foundation)
             api(compose.animation)
+            api(compose.materialIconsExtended)
             api("moe.tlaster:precompose:1.6.0")
             api("moe.tlaster:precompose-viewmodel:1.6.0")
             implementation(compose.material)
