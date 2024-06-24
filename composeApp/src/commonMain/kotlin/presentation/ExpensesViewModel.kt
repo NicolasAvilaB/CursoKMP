@@ -2,6 +2,7 @@ package presentation
 
 import data.ExpensesRepository
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import moe.tlaster.precompose.viewmodel.ViewModel
 import moe.tlaster.precompose.viewmodel.viewModelScope
@@ -18,10 +19,6 @@ class ExpensesViewModel(
         MutableStateFlow(defaultUiState)
     private val allExpenses = expensesRepository.getAllEmpenses()
 
-    init {
-        getAllExpenses()
-    }
-
     private fun changeState(){
         _uiState.value = DisplayUiState(
             expenses = allExpenses,
@@ -29,11 +26,12 @@ class ExpensesViewModel(
         )
     }
 
-    private fun getAllExpenses() {
+    fun getAllExpenses(): StateFlow<ExpensesUiState> {
         _uiState.value = ExpensesUiState.LoadingUiState
         viewModelScope.launch {
             changeState()
         }
+        return _uiState
     }
 
     fun addExpense(expense: Expenses) {
