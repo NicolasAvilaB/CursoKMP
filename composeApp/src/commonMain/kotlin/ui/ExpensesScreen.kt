@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import presentation.events.ExpensesUiState
 import theme.getColorsTheme
 import ui.components.AllExpensesHeader
 import ui.components.ExpensedTotalHeader
@@ -17,7 +18,7 @@ import ui.components.ExpensedTotalHeader
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ExpensesScreen(
-
+    uiState: ExpensesUiState,
 ) {
     val colors = getColorsTheme()
 

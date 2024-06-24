@@ -52,4 +52,32 @@ object ExpensesManager {
         )
     )
 
+    fun addExpense(expense: Expenses) {
+        fakeExpenseList.add(expense.copy(id = currentId++))
+    }
+
+    fun editExpense(expense: Expenses) {
+        val index = fakeExpenseList.indexOfFirst { it.id == expense.id }
+        if (index != -1) {
+            fakeExpenseList[index] = fakeExpenseList[index].copy(
+                amount = expense.amount,
+                category = expense.category,
+                description = expense.description,
+                title = expense.title
+            )
+        }
+    }
+
+    fun getCategoryExpenses(): List<ExpensesCategory> {
+        return listOf(
+            ExpensesCategory.GROCERIES,
+            ExpensesCategory.SNACKS,
+            ExpensesCategory.CAR,
+            ExpensesCategory.OTHER,
+            ExpensesCategory.COFFEE,
+            ExpensesCategory.PARTY,
+            ExpensesCategory.HOUSE,
+        )
+    }
+
 }
