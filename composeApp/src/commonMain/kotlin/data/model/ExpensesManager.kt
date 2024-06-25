@@ -12,7 +12,7 @@ object ExpensesManager {
             id = currentId++,
             amount = 75.00,
             category = ExpensesCategory.GROCERIES,
-            description = "Weekly Buy",
+            description = "Weekly Groceries",
             title = "Weekly Groceries"
         ),
         Expenses(

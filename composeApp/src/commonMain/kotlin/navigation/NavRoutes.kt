@@ -2,6 +2,6 @@ package navigation
 
 sealed class NavRoutes(var route: String){
     object ExpensesScreen: NavRoutes("/expensesScreen")
-    object NavAddExpensesScreen: NavRoutes("/addExpenses")
-    data class AddExpensesScreen(val id: String): NavRoutes("/addExpenses/${id}")
+    object AddExpensesScreen: NavRoutes("/addExpenses")
+    data class EditExpensesScreen(val id: String): NavRoutes("/editExpenses/${id}")
 }

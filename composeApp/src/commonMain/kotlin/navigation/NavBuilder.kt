@@ -3,19 +3,21 @@ package navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import moe.tlaster.precompose.flow.collectAsStateWithLifecycle
+import moe.tlaster.precompose.navigation.BackStackEntry
+import moe.tlaster.precompose.navigation.path
 import presentation.expensescreen.ExpensesViewModel
 import presentation.expensescreen.events.ExpensesUiState
 import theme.model.DarkModeColors
+import ui.addexpensesscreen.AddExpensesScreen
 import ui.expensescreen.ExpensesScreen
-import ui.expensescreen.model.Expenses
 import ui.expensescreen.model.ExpensesCategory
-import ui.expenseseditscreen.ExpensesEditScreen
+import ui.editexpensesscreen.EditExpensesScreen
 
 @Composable
 internal fun navExpenses(
     viewModel: ExpensesViewModel,
+    colors: DarkModeColors,
     navGo: NavGo,
-    colors: DarkModeColors
 ) {
     val uiState = remember {
         viewModel.getAllExpenses()
@@ -28,23 +30,48 @@ internal fun navExpenses(
         navGo = navGo,
         colors = colors
     ) { expense ->
-        navGo.addExpenses.invoke(expense.id.toString())
+        navGo.editExpenses.invoke(expense.id.toString())
     }
 }
 
 @Composable
-internal fun navEditExpenses(
-    expensesEdit: Expenses?,
+internal fun navAddExpenses(
+    viewModel: ExpensesViewModel,
+    backStackEntry: BackStackEntry,
     categoryList: List<ExpensesCategory>,
     colors: DarkModeColors,
-    navGo: NavGo,
-    addExpenses: (Expenses) -> Unit
+    navGo: NavGo
 ) {
-    ExpensesEditScreen(
+    val idFromPath = backStackEntry.path<Long>("id")
+    val expensesEdit = idFromPath?.let { id ->
+        viewModel.getExpensesWithId(id)
+    }
+    AddExpensesScreen(
+        viewModel = viewModel,
         expensesEdit = expensesEdit,
         categoryList = categoryList,
-        navGo = navGo,
         colors = colors,
-        addExpenses = addExpenses
+        navGo = navGo,
+    )
+}
+
+@Composable
+internal fun navEditExpenses(
+    viewModel: ExpensesViewModel,
+    backStackEntry: BackStackEntry,
+    categoryList: List<ExpensesCategory>,
+    colors: DarkModeColors,
+    navGo: NavGo
+) {
+    val idFromPath = backStackEntry.path<Long>("id")
+    val expensesEdit = idFromPath?.let { id ->
+        viewModel.getExpensesWithId(id)
+    }
+    EditExpensesScreen(
+        viewModel = viewModel,
+        expensesEdit = expensesEdit,
+        categoryList = categoryList,
+        colors = colors,
+        navGo = navGo,
     )
 }

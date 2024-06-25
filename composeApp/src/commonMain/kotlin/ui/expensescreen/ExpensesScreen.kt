@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -50,18 +49,12 @@ fun ExpensesScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(
-                        onClick = {
-                            navGo.popBackStack.invoke()
-                        }
-                    ) {
-                        Icon(
-                            modifier = Modifier.padding(10.dp),
-                            imageVector = Icons.Filled.Apps,
-                            contentDescription = "Menu",
-                            tint = colors.textColor
-                        )
-                    }
+                    Icon(
+                        modifier = Modifier.padding(10.dp),
+                        imageVector = Icons.Filled.Apps,
+                        contentDescription = "Menu",
+                        tint = colors.textColor
+                    )
                 },
                 elevation = 0.dp,
             )
@@ -70,7 +63,7 @@ fun ExpensesScreen(
             FloatingActionButton(
                 modifier = Modifier.padding(10.dp),
                 onClick = {
-                    navGo.navAddExpenses.invoke()
+                    navGo.addExpenses.invoke()
                 },
                 shape = RoundedCornerShape(50),
                 backgroundColor = colors.addIconColor,

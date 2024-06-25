@@ -7,7 +7,6 @@ import androidx.compose.ui.Modifier
 import data.ExpensesImpl
 import data.model.ExpensesManager
 import moe.tlaster.precompose.navigation.NavHost
-import moe.tlaster.precompose.navigation.path
 import moe.tlaster.precompose.navigation.rememberNavigator
 import moe.tlaster.precompose.viewmodel.viewModel
 import presentation.expensescreen.ExpensesViewModel
@@ -47,25 +46,28 @@ fun NavController() {
         )
 
         scene(
-            route = NavRoutes.AddExpensesScreen("{id}?").route,
+            route = NavRoutes.AddExpensesScreen.route,
             content = { backStackEntry ->
-                val idFromPath = backStackEntry.path<Long>("id")
-                val expensesEdit = idFromPath?.let { id ->
-                    viewModel.getExpensesWithId(id)
-                }
-                navEditExpenses(
-                    expensesEdit = expensesEdit,
+                navAddExpenses(
+                    viewModel = viewModel,
+                    backStackEntry = backStackEntry,
                     categoryList= viewModel.getCategory(),
-                    navGo = navGo,
-                    colors = colors
-                ) { expens ->
-                    if (expensesEdit == null) {
-                        viewModel.addExpense(expens)
-                    } else {
-                        viewModel.editExpense(expens)
-                    }
-                    navGo.popBackStack.invoke()
-                }
+                    colors = colors,
+                    navGo = navGo
+                )
+            }
+        )
+
+        scene(
+            route = NavRoutes.EditExpensesScreen("{id}?").route,
+            content = { backStackEntry ->
+                navEditExpenses(
+                    viewModel = viewModel,
+                    backStackEntry = backStackEntry,
+                    categoryList= viewModel.getCategory(),
+                    colors = colors,
+                    navGo = navGo
+                )
             }
         )
     }

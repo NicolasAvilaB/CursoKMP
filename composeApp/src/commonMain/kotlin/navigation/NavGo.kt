@@ -5,16 +5,12 @@ import moe.tlaster.precompose.navigation.Navigator
 class NavGo(
     navigator: Navigator
 ) {
-    val detailExpenses: (String) -> Unit = { id ->
-        navigator.navigate(NavRoutes.ExpensesScreen.route)
+    val addExpenses: () -> Unit = {
+        navigator.navigate(NavRoutes.AddExpensesScreen.route)
     }
 
-    val addExpenses: (String) -> Unit = { id ->
-        navigator.navigate(NavRoutes.AddExpensesScreen(id).route)
-    }
-
-    val navAddExpenses: () -> Unit = {
-        navigator.navigate(NavRoutes.NavAddExpensesScreen.route)
+    val editExpenses: (String) -> Unit = { id ->
+        navigator.navigate(NavRoutes.EditExpensesScreen(id).route)
     }
 
     val popBackStack: () -> Unit = {
