@@ -1,4 +1,4 @@
-package ui.components
+package ui.expensescreen.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding

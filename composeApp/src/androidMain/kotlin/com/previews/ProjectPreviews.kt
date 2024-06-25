@@ -6,16 +6,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import data.ExpensesImpl
-import data.ExpensesRepository
-import data.model.ExpensesManager
-import presentation.ExpensesViewModel
-import ui.ExpensesScreen
-import ui.components.AllExpensesHeader
-import ui.components.ExpensedTotalHeader
-import ui.components.ExpensesItem
-import ui.model.Expenses
-import ui.model.ExpensesCategory
+import ui.expensescreen.components.AllExpensesHeader
+import ui.expensescreen.components.ExpensedTotalHeader
+import ui.expensescreen.components.ExpensesItem
+import ui.expensescreen.model.Expenses
+import ui.expensescreen.model.ExpensesCategory
 
 @Preview(showBackground = true)
 @Composable

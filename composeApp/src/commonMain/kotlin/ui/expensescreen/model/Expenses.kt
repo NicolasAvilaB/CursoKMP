@@ -1,4 +1,4 @@
-package ui.model
+package ui.expensescreen.model
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Coffee

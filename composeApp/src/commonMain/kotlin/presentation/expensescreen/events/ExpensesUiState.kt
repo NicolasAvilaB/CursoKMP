@@ -1,6 +1,6 @@
-package presentation.events
+package presentation.expensescreen.events
 
-import ui.model.Expenses
+import ui.expensescreen.model.Expenses
 
 sealed class ExpensesUiState {
     object LoadingUiState : ExpensesUiState()

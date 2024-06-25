@@ -3,14 +3,18 @@ package navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import moe.tlaster.precompose.flow.collectAsStateWithLifecycle
-import presentation.ExpensesViewModel
-import presentation.events.ExpensesUiState
-import ui.ExpensesScreen
+import presentation.expensescreen.ExpensesViewModel
+import presentation.expensescreen.events.ExpensesUiState
+import theme.model.DarkModeColors
+import ui.expensescreen.ExpensesScreen
+import ui.expensescreen.model.Expenses
+import ui.expenseseditscreen.ExpensesEditScreen
 
 @Composable
 internal fun navExpenses(
     viewModel: ExpensesViewModel,
-    navGo: NavGo
+    navGo: NavGo,
+    colors: DarkModeColors
 ) {
     val uiState = remember {
         viewModel.getAllExpenses()
@@ -18,7 +22,24 @@ internal fun navExpenses(
         initial = ExpensesUiState.DisplayUiState()
     ).value
 
-    ExpensesScreen(uiState = uiState) { expense ->
+    ExpensesScreen(
+        uiState = uiState,
+        navGo = navGo,
+        colors = colors
+    ) { expense ->
         navGo.addExpenses.invoke(expense.id.toString())
     }
+}
+
+@Composable
+internal fun navEditExpenses(
+    expensesEdit: Expenses?,
+    navGo: NavGo,
+    addExpenses: (Expenses) -> Unit
+) {
+    ExpensesEditScreen(
+        expensesEdit = expensesEdit,
+        navGo = navGo,
+        addExpenses = addExpenses
+    )
 }

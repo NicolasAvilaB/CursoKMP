@@ -1,4 +1,4 @@
-package ui.components
+package ui.expensescreen.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -21,7 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import theme.getColorsTheme
-import ui.model.Expenses
+import ui.expensescreen.model.Expenses
 
 @Composable
 fun ExpensesItem(
@@ -31,9 +31,7 @@ fun ExpensesItem(
     val colors = getColorsTheme()
 
     Card(
-        modifier = Modifier
-            .padding(horizontal = 16.dp)
-            .fillMaxWidth()
+        modifier = Modifier.fillMaxWidth()
             .clickable { onExpensesClick(expenses) },
         shape = RoundedCornerShape(30),
     ) {

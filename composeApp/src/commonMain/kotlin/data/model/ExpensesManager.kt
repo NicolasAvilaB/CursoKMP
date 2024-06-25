@@ -1,7 +1,7 @@
 package data.model
 
-import ui.model.Expenses
-import ui.model.ExpensesCategory
+import ui.expensescreen.model.Expenses
+import ui.expensescreen.model.ExpensesCategory
 
 object ExpensesManager {
 

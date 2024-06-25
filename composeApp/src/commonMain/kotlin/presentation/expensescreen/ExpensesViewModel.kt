@@ -1,4 +1,4 @@
-package presentation
+package presentation.expensescreen
 
 import data.ExpensesRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import moe.tlaster.precompose.viewmodel.ViewModel
 import moe.tlaster.precompose.viewmodel.viewModelScope
-import presentation.events.ExpensesUiState
-import presentation.events.ExpensesUiState.DisplayUiState
-import ui.model.Expenses
+import presentation.expensescreen.events.ExpensesUiState
+import presentation.expensescreen.events.ExpensesUiState.DisplayUiState
+import ui.expensescreen.model.Expenses
 
 class ExpensesViewModel(
     private val expensesRepository: ExpensesRepository
