@@ -9,6 +9,7 @@ import moe.tlaster.precompose.viewmodel.viewModelScope
 import presentation.expensescreen.events.ExpensesUiState
 import presentation.expensescreen.events.ExpensesUiState.DisplayUiState
 import ui.expensescreen.model.Expenses
+import ui.expensescreen.model.ExpensesCategory
 
 class ExpensesViewModel(
     private val expensesRepository: ExpensesRepository
@@ -50,5 +51,9 @@ class ExpensesViewModel(
 
     fun getExpensesWithId(id: Long): Expenses {
         return allExpenses.first { it.id == id }
+    }
+
+    fun getCategory(): List<ExpensesCategory>{
+        return expensesRepository.getCategoriesExpenses()
     }
 }

@@ -55,7 +55,9 @@ fun NavController() {
                 }
                 navEditExpenses(
                     expensesEdit = expensesEdit,
+                    categoryList= viewModel.getCategory(),
                     navGo = navGo,
+                    colors = colors
                 ) { expens ->
                     if (expensesEdit == null) {
                         viewModel.addExpense(expens)

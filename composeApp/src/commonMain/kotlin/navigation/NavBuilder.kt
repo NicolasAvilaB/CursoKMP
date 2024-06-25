@@ -8,6 +8,7 @@ import presentation.expensescreen.events.ExpensesUiState
 import theme.model.DarkModeColors
 import ui.expensescreen.ExpensesScreen
 import ui.expensescreen.model.Expenses
+import ui.expensescreen.model.ExpensesCategory
 import ui.expenseseditscreen.ExpensesEditScreen
 
 @Composable
@@ -34,12 +35,16 @@ internal fun navExpenses(
 @Composable
 internal fun navEditExpenses(
     expensesEdit: Expenses?,
+    categoryList: List<ExpensesCategory>,
+    colors: DarkModeColors,
     navGo: NavGo,
     addExpenses: (Expenses) -> Unit
 ) {
     ExpensesEditScreen(
         expensesEdit = expensesEdit,
+        categoryList = categoryList,
         navGo = navGo,
+        colors = colors,
         addExpenses = addExpenses
     )
 }
