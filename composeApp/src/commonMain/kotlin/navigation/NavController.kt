@@ -6,9 +6,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import data.ExpensesImpl
 import data.model.ExpensesManager
+import moe.tlaster.precompose.koin.koinViewModel
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.rememberNavigator
 import moe.tlaster.precompose.viewmodel.viewModel
+import org.koin.core.parameter.parametersOf
 import presentation.expensescreen.ExpensesViewModel
 import theme.getColorsTheme
 
@@ -23,11 +25,7 @@ fun NavController() {
 
     val colors = getColorsTheme()
 
-    val viewModel = viewModel(
-        modelClass = ExpensesViewModel::class
-    ) {
-        ExpensesViewModel(ExpensesImpl(ExpensesManager))
-    }
+    val viewModel = koinViewModel(ExpensesViewModel::class) { parametersOf()}
 
     NavHost(
         modifier = Modifier.background(color = colors.background),

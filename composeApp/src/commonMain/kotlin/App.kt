@@ -5,6 +5,7 @@ import moe.tlaster.precompose.navigation.rememberNavigator
 import navigation.NavController
 import navigation.NavGo
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.KoinContext
 import theme.AppTheme
 import theme.getColorsTheme
 
@@ -12,8 +13,10 @@ import theme.getColorsTheme
 @Preview
 fun App() {
     PreComposeApp {
-        AppTheme {
-            NavController()
+        KoinContext {
+            AppTheme {
+                NavController()
+            }
         }
     }
 }

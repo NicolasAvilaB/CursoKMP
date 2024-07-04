@@ -32,6 +32,10 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(project.dependencies.platform("io.insert-koin:koin-bom:3.5.1"))
+            implementation("io.insert-koin:koin-core")
+            implementation("io.insert-koin:koin-android")
+
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -40,12 +44,22 @@ kotlin {
             api(compose.materialIconsExtended)
             api("moe.tlaster:precompose:1.6.0")
             api("moe.tlaster:precompose-viewmodel:1.6.0")
+
             implementation(compose.material)
             implementation(compose.material3)
 
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+
+            implementation(project.dependencies.platform("io.insert-koin:koin-bom:3.5.1"))
+            implementation("io.insert-koin:koin-core")
+            implementation("io.insert-koin:koin-compose")
+            api("moe.tlaster:precompose-koin:1.6.0")
+        }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }
