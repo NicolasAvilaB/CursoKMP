@@ -7,9 +7,21 @@ CREATE TABLE ExpensesEntity (
 
 );
 
+INSERT INTO ExpensesEntity (title, amount, categoryName, description)
+VALUES
+('Weekly Buy',70.0,'GROCERIES','Weekly Buy'),
+('Homies',10.2,'SNACKS','Homies'),
+('Audi A1',21000.0,'CAR','Audi A1'),
+('Beans and cream',15.0,'COFFEE','Beans and cream'),
+('Weekend party',25.0,'PARTY','Weekend party'),
+('Expenses',120.0,'HOUSE','Expenses'),
+('Cleaning',25.0,'OTHER','CLEANING');
+
+insert:
 INSERT INTO ExpensesEntity (title,amount,categoryName,description)
 VALUES (?,?,?,?);
 
+update:
 UPDATE ExpensesEntity
 SET title = ?,
     amount = ?,
@@ -17,4 +29,8 @@ SET title = ?,
     description = ?
 WHERE id = ?;
 
+selectAll:
 SELECT * FROM ExpensesEntity;
+
+categories:
+SELECT categoryName FROM ExpensesEntity;
