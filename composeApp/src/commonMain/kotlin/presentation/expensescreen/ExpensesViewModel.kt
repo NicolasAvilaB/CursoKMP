@@ -14,11 +14,10 @@ import ui.expensescreen.model.ExpensesCategory
 class ExpensesViewModel(
     private val expensesRepository: ExpensesRepository
 ) : ViewModel() {
-
     private val defaultUiState: ExpensesUiState = DisplayUiState()
     private val _uiState: MutableStateFlow<ExpensesUiState> =
         MutableStateFlow(defaultUiState)
-    private var allExpenses: MutableList<Expenses> = mutableListOf()
+    private val allExpenses = expensesRepository.getAllEmpenses()
 
     private fun changeState(){
         _uiState.value = DisplayUiState(
@@ -27,35 +26,25 @@ class ExpensesViewModel(
         )
     }
 
-    fun updateExpenseList(){
-        viewModelScope.launch {
-            allExpenses = expensesRepository.getAllEmpenses().toMutableList()
-            changeState()
-        }
-    }
-
     fun getAllExpenses(): StateFlow<ExpensesUiState> {
         _uiState.value = ExpensesUiState.LoadingUiState
         viewModelScope.launch {
-            expensesRepository.getAllEmpenses()
-            updateExpenseList()
             changeState()
         }
         return _uiState
-        updateExpenseList()
     }
 
     fun addExpense(expense: Expenses) {
         viewModelScope.launch {
             expensesRepository.addExpense(expense)
-            updateExpenseList()
+            changeState()
         }
     }
 
     fun editExpense(expense: Expenses) {
         viewModelScope.launch {
             expensesRepository.editExpense(expense)
-            updateExpenseList()
+            changeState()
         }
     }
 

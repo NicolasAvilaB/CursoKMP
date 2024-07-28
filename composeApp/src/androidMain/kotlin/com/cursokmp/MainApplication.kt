@@ -1,8 +1,6 @@
 package com.cursokmp
 
 import android.app.Application
-import com.example.Database
-import data.remote.DatabasesDriverFactory
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -14,7 +12,7 @@ class MainApplication: Application() {
         startKoin {
             androidContext(this@MainApplication)
             androidLogger()
-            modules(AppModule(databases = Database.invoke(DatabasesDriverFactory(this@MainApplication).createDriver())))
+            modules(AppModule())
         }
     }
 }
