@@ -4,8 +4,9 @@ import ui.expensescreen.model.Expenses
 import ui.expensescreen.model.ExpensesCategory
 
 interface ExpensesRepository {
-    fun getAllEmpenses(): List<Expenses>
-    fun addExpense(expense: Expenses)
-    fun editExpense(expense: Expenses)
+    suspend fun getAllEmpenses(): List<Expenses>
+    suspend fun addExpense(expense: Expenses)
+    suspend fun editExpense(expense: Expenses)
     fun getCategoriesExpenses(): List<ExpensesCategory>
+    suspend fun deleteExpense(expense: Expenses)
 }

@@ -1,4 +1,4 @@
-package data.model
+package data.models
 
 import ui.expensescreen.model.Expenses
 import ui.expensescreen.model.ExpensesCategory

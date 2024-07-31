@@ -8,28 +8,36 @@ import moe.tlaster.precompose.viewmodel.ViewModel
 import moe.tlaster.precompose.viewmodel.viewModelScope
 import presentation.expensescreen.events.ExpensesUiState
 import presentation.expensescreen.events.ExpensesUiState.DisplayUiState
+import presentation.expensescreen.events.ExpensesUiState.ErrorUiState
+import presentation.expensescreen.events.ExpensesUiState.LoadingUiState
 import ui.expensescreen.model.Expenses
 import ui.expensescreen.model.ExpensesCategory
 
 class ExpensesViewModel(
     private val expensesRepository: ExpensesRepository
 ) : ViewModel() {
-    private val defaultUiState: ExpensesUiState = DisplayUiState()
+    private val defaultUiState: ExpensesUiState = LoadingUiState
     private val _uiState: MutableStateFlow<ExpensesUiState> =
         MutableStateFlow(defaultUiState)
-    private val allExpenses = expensesRepository.getAllEmpenses()
 
-    private fun changeState(){
-        _uiState.value = DisplayUiState(
-            expenses = allExpenses,
-            totalExpenses = allExpenses.sumOf { it.amount }
-        )
+    private fun refreshListState(){
+        viewModelScope.launch{
+            runCatching {
+                val allExpenses = expensesRepository.getAllEmpenses()
+                _uiState.value = DisplayUiState(
+                    expenses = allExpenses,
+                    totalExpenses = allExpenses.sumOf { it.amount }
+                )
+            }.onFailure { e->
+                _uiState.value = ErrorUiState(e = e)
+            }
+        }
     }
 
     fun getAllExpenses(): StateFlow<ExpensesUiState> {
-        _uiState.value = ExpensesUiState.LoadingUiState
+        _uiState.value = defaultUiState
         viewModelScope.launch {
-            changeState()
+            refreshListState()
         }
         return _uiState
     }
@@ -37,19 +45,26 @@ class ExpensesViewModel(
     fun addExpense(expense: Expenses) {
         viewModelScope.launch {
             expensesRepository.addExpense(expense)
-            changeState()
+            refreshListState()
         }
     }
 
     fun editExpense(expense: Expenses) {
         viewModelScope.launch {
             expensesRepository.editExpense(expense)
-            changeState()
+            refreshListState()
         }
     }
 
-    fun getExpensesWithId(id: Long): Expenses {
-        return allExpenses.first { it.id == id }
+    fun deleteExpense(expense: Expenses){
+        viewModelScope.launch {
+            expensesRepository.deleteExpense(expense)
+            refreshListState()
+        }
+    }
+
+    fun getExpensesWithId(id: Long): Expenses? {
+        return (_uiState.value as? DisplayUiState)?.expenses?.firstOrNull() { it.id == id}
     }
 
     fun getCategory(): List<ExpensesCategory>{

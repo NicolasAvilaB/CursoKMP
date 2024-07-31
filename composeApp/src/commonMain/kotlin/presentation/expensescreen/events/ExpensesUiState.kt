@@ -8,6 +8,6 @@ sealed class ExpensesUiState {
         val expenses: List<Expenses> = emptyList(),
         val totalExpenses: Double = 0.0
     ) : ExpensesUiState()
-    object ErrorUiState : ExpensesUiState()
+    data class ErrorUiState(val e: Throwable) : ExpensesUiState()
 
 }

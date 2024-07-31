@@ -118,7 +118,7 @@ fun ExpensesContent(
                 }
             }
         }
-        is ExpensesUiState.ErrorUiState -> { Text("Error") }
+        is ExpensesUiState.ErrorUiState -> { Text("Error ${uiState.e}") }
     }
 }
 
