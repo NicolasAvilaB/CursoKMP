@@ -69,7 +69,7 @@ class ExpensesImpl(
         return expensesManager.getCategoryExpenses()
     }
 
-    override suspend fun deleteExpense(expense: Expenses) {
-        httpClient.delete("$BASE_URL/expenses/${expense.id}")
+    override suspend fun deleteExpense(id: Long) {
+        httpClient.delete("$BASE_URL/expenses/${id}")
     }
 }

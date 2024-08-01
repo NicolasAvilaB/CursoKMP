@@ -8,5 +8,5 @@ interface ExpensesRepository {
     suspend fun addExpense(expense: Expenses)
     suspend fun editExpense(expense: Expenses)
     fun getCategoriesExpenses(): List<ExpensesCategory>
-    suspend fun deleteExpense(expense: Expenses)
+    suspend fun deleteExpense(id: Long)
 }

@@ -28,10 +28,12 @@ internal fun navExpenses(
     ExpensesScreen(
         uiState = uiState,
         navGo = navGo,
-        colors = colors
-    ) { expense ->
-        navGo.editExpenses.invoke(expense.id.toString())
-    }
+        colors = colors,
+        viewModel = viewModel,
+        onExpensesClick = { expense ->
+            navGo.editExpenses.invoke(expense.id.toString())
+        },
+    )
 }
 
 @Composable

@@ -56,9 +56,9 @@ class ExpensesViewModel(
         }
     }
 
-    fun deleteExpense(expense: Expenses){
+    fun deleteExpense(id: Long){
         viewModelScope.launch {
-            expensesRepository.deleteExpense(expense)
+            expensesRepository.deleteExpense(id)
             refreshListState()
         }
     }

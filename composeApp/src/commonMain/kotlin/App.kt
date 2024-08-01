@@ -1,20 +1,23 @@
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import data.cache.ConfigDevice
+import data.cache.SessionCache
 import moe.tlaster.precompose.PreComposeApp
-import moe.tlaster.precompose.navigation.rememberNavigator
 import navigation.NavController
-import navigation.NavGo
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinContext
 import theme.AppTheme
-import theme.getColorsTheme
 
 @Composable
 @Preview
-fun App() {
+fun App(
+    configDevice: ConfigDevice ?= null
+) {
     PreComposeApp {
+
+
         KoinContext {
             AppTheme {
+                SessionCache.configDevice = configDevice
                 NavController()
             }
         }

@@ -5,6 +5,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import data.cache.SessionCache
 import theme.model.DarkModeColors
 
 @Composable
@@ -23,7 +24,7 @@ fun AppTheme(content: @Composable () -> Unit) {
 
 @Composable
 fun getColorsTheme(): DarkModeColors {
-    val isDarkMode = false
+    val isDarkMode = SessionCache.isDarkMode()
 
     val purple = Color(0xFF6A66FF)
     val colorExpenseItem = if (isDarkMode) Color(0xFF090808) else Color(0xFFF1F1F1)

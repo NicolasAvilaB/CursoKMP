@@ -3,6 +3,7 @@ package ui.expensescreen
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -17,22 +18,27 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Apps
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import navigation.NavGo
+import presentation.expensescreen.ExpensesViewModel
 import presentation.expensescreen.events.ExpensesUiState
 import theme.model.DarkModeColors
 import ui.expensescreen.components.AllExpensesHeader
 import ui.expensescreen.components.ExpensedTotalHeader
 import ui.expensescreen.components.ExpensesItem
+import ui.expensescreen.components.SwipeToDeleteContainer
 import ui.expensescreen.model.Expenses
 
 @Composable
 fun ExpensesScreen(
     uiState: ExpensesUiState,
     navGo: NavGo,
+    viewModel: ExpensesViewModel,
     colors: DarkModeColors,
     onExpensesClick: (expenses: Expenses) -> Unit
 ) {
@@ -80,45 +86,71 @@ fun ExpensesScreen(
         ExpensesContent(
             uiState = uiState,
             colors = colors,
+            viewModel = viewModel,
             onExpensesClick = onExpensesClick
         )
     }
 }
-    
+
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ExpensesContent(
     uiState: ExpensesUiState,
     colors: DarkModeColors,
+    viewModel: ExpensesViewModel,
     onExpensesClick: (expenses: Expenses) -> Unit
-){
+) {
     when (uiState) {
-        is ExpensesUiState.LoadingUiState -> { Text("Loading") }
+        is ExpensesUiState.LoadingUiState -> {
+            Text("Loading")
+        }
+
         is ExpensesUiState.DisplayUiState -> {
-            LazyColumn(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                val stateValue = uiState
-                stickyHeader {
-                    Column(modifier = Modifier.background(colors.background)) {
-                        ExpensedTotalHeader(stateValue.totalExpenses)
-                        AllExpensesHeader()
-                    }
+
+            val stateValue = uiState
+            if (stateValue.expenses.isEmpty()) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "No hay mas expensas, agregue algunas por favor",
+                    )
                 }
-                stateValue.expenses?.let { listItems ->
-                    items(listItems.size) { index ->
-                        val itemExpense = listItems[index]
-                        ExpensesItem(
-                            expenses = itemExpense,
-                            onExpensesClick = onExpensesClick
-                        )
+            } else {
+                LazyColumn(
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    stickyHeader {
+                        Column(modifier = Modifier.background(colors.background)) {
+                            ExpensedTotalHeader(stateValue.totalExpenses)
+                            AllExpensesHeader()
+                        }
+                    }
+                    stateValue.expenses?.let { listItems ->
+                        items(listItems.size) { index ->
+                            val itemExpense = listItems[index]
+                            SwipeToDeleteContainer(
+                                item = itemExpense,
+                                idItem = itemExpense.id,
+                                viewModel = viewModel
+                            ) {
+                                ExpensesItem(
+                                    expenses = itemExpense,
+                                    onExpensesClick = onExpensesClick
+                                )
+                            }
+                        }
                     }
                 }
             }
         }
-        is ExpensesUiState.ErrorUiState -> { Text("Error ${uiState.e}") }
+
+        is ExpensesUiState.ErrorUiState -> {
+            Text("Error ${uiState.e}")
+        }
     }
 }
 
