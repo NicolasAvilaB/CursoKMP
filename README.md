@@ -12,3 +12,21 @@ This is a Kotlin Multiplatform project targeting Android, iOS.
 
 
 Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+
+
+For this proyect use next methology and tools:
+- MVVM
+- Clean Architecture
+- Koin
+- Ktor
+- SOLID
+- Singleton
+- Flows
+- Kotlin compartido con iOS
+- Ui Jetpack Compose compartida con iOS
+- Patrones de Diseño
+- Backend con Kotlin y Ktor
+
+### Video / Image App on Android / iOS
+
+<img width="702" alt="Captura de pantalla 2024-08-02 a la(s) 01 12 05" src="https://github.com/user-attachments/assets/a2873efa-8a89-47eb-8ffb-a2281012a2a5">
