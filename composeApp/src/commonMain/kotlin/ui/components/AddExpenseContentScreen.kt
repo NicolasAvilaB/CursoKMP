@@ -1,8 +1,10 @@
 package ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -44,7 +46,10 @@ fun AddExpenseContentScreen(
     sheetState: ModalBottomSheetState
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth().padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = colors.background)
+            .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
         ExpenseAmount(

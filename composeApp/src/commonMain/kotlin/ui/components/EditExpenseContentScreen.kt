@@ -1,8 +1,10 @@
 package ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -45,7 +47,10 @@ fun EditExpenseContentScreen(
     sheetState: ModalBottomSheetState
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth().padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colors.background)
+            .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
         ExpenseAmount(
@@ -89,7 +94,7 @@ fun EditExpenseContentScreen(
                     description = description.value,
                     title = description.value
                 )
-                val expenseFromEdit = expensesEdit?.id.let { expense.copy(id = it ?:0 ) }
+                val expenseFromEdit = expensesEdit?.id.let { expense.copy(id = it ?: 0) }
                 viewModel.editExpense(expenseFromEdit)
                 navGo.popBackStack.invoke()
             }

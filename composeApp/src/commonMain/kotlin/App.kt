@@ -13,8 +13,6 @@ fun App(
     configDevice: ConfigDevice ?= null
 ) {
     PreComposeApp {
-
-
         KoinContext {
             AppTheme {
                 SessionCache.configDevice = configDevice

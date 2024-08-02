@@ -120,11 +120,13 @@ fun ExpensesContent(
                 }
             } else {
                 LazyColumn(
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(colors.background),
+                    verticalArrangement = Arrangement.spacedBy(5.dp)
                 ) {
                     stickyHeader {
-                        Column(modifier = Modifier.background(colors.background)) {
+                        Column(modifier = Modifier.background(colors.background).padding(10.dp)) {
                             ExpensedTotalHeader(stateValue.totalExpenses)
                             AllExpensesHeader()
                         }

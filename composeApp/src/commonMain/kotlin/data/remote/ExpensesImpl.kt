@@ -20,7 +20,7 @@ class ExpensesImpl(
     private val httpClient: HttpClient
 ) : ExpensesRepository {
 
-    private val BASE_URL = "http://192.168.1.30:8080"
+    private val BASE_URL = "http://192.168.0.120:8080"
 
     override suspend fun getAllEmpenses(): List<Expenses> {
         val networkResponse = httpClient.get("$BASE_URL/expenses").body<List<RemoteListExpenses>>()
