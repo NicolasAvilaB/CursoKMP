@@ -39,7 +39,7 @@ kotlin {
             implementation("io.insert-koin:koin-android")
             implementation(libs.ktor.client.okhttp)
             implementation(libs.kotlinx.coroutines.android)
-
+implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.3-beta")
         }
         commonMain.dependencies {
             implementation(compose.runtime)
